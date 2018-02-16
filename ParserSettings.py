@@ -14,8 +14,15 @@ class ParserSettings:
         self.output_rows_examined_max = -1
         self.output_datetime_min = '0000-00-00'
         self.output_datetime_max = '0000-00-00'
-        self.output_database_name = ''
+        self.output_database_user = ''
         self.output_database_host = ''
+        self.output_database_name = ''
+        self.display_datetime = 1
+        self.display_database_host = 0
+        self.display_time = 1
+        self.display_database = 1
+        self.display_timestamp = 0
+        self.display_statement = 1
 
     def read(self, file):
         settings = dict()
@@ -40,8 +47,15 @@ class ParserSettings:
         self.output_rows_examined_max = settings["output_rows_examined_max"]
         self.output_datetime_min = settings["output_datetime_min"]
         self.output_datetime_max = settings["output_datetime_max"]
-        self.output_database_name = settings["output_database_name"]
+        self.output_database_user = settings["output_database_user"]
         self.output_database_host = settings["output_database_host"]
+        self.output_database_name = settings["output_database_name"]
+        self.display_datetime = settings["display_datetime"]
+        self.display_database_host = settings["display_database_host"]
+        self.display_time = settings["display_time"]
+        self.display_database = settings["display_database"]
+        self.display_timestamp = settings["display_timestamp"]
+        self.display_statement = settings["display_statement"]
 
     def write(self, file):
         with open(file, 'w') as outfile:
@@ -59,5 +73,13 @@ class ParserSettings:
             outfile.write("output_rows_examined_max: " + self.output_rows_examined_max + "\n")
             outfile.write("output_datetime_min: " + self.output_datetime_min + "\n")
             outfile.write("output_datetime_max: " + self.output_datetime_max + "\n")
+            outfile.write("output_database_user: " + self.output_database_user + "\n")
+            outfile.write("output_database_host: " + self.output_database_host + "\n")
             outfile.write("output_database_name: " + self.output_database_name + "\n")
-            outfile.write("output_database_host: " + self.output_database_host + "\n\n")
+            outfile.write("display_datetime: " + self.display_datetime + "\n")
+            outfile.write("display_database_host: " + self.display_database_host + "\n")
+            outfile.write("display_time: " + self.display_time + "\n")
+            outfile.write("display_database: " + self.display_database + "\n")
+            outfile.write("display_timestamp: " + self.display_timestamp + "\n")
+            outfile.write("display_statement: " + self.display_statement + "\n")
+            outfile.write("\n")
