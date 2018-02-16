@@ -1,9 +1,9 @@
 class ParserSettings:
     def __init__(self):
-        self.order = ''
-        self.sort = ''
-        self.default_log_folder = ''
-        self.default_log_name = ''
+        self.order = 'query_time'
+        self.sort = 'desc'
+        self.default_log_folder = 'logs'
+        self.default_log_name = 'output/mysql_slow_log.txt'
         self.output_query_time_min = -1
         self.output_query_time_max = -1
         self.output_lock_time_min = -1
@@ -30,8 +30,8 @@ class ParserSettings:
         with open(file, "r") as infile:
             for line in infile.readlines():
                 parsed_line = line.strip('\n').split(":")
-                if (len(parsed_line) == 2):
-                    settings[parsed_line[0].strip()] = parsed_line[-1].strip()
+                if len(parsed_line) == 2:
+                    settings[parsed_line[0].strip()] = parsed_line[1].strip()
 
         self.order = settings["order"]
         self.sort = settings["sort"]
