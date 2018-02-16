@@ -1,2 +1,4 @@
+import parser_ui
+
 if __name__ == '__main__':
-    pass # TODO
+    parser = parser_ui.ParserUI()
