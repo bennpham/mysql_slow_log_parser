@@ -105,3 +105,7 @@ ENV/
 
 # cfg files
 cfg/*.cfg
+
+# all file outputs folder & logs folder for users to add in all the logs
+logs
+outputs
