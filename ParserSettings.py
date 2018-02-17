@@ -36,29 +36,29 @@ class ParserSettings:
                 if len(parsed_line) == 2:
                     settings[parsed_line[0].strip()] = parsed_line[1].strip().strip('"')
 
-        self.order = _sanitize_order(settings["order"])
-        self.sort = _sanitize_sort(settings["sort"])
+        self.order = sanitize_order(settings["order"])
+        self.sort = sanitize_sort(settings["sort"])
         self.default_log_folder = settings["default_log_folder"]
         self.default_log_name = settings["default_log_name"]
-        self.output_query_time_min = _sanitize_number(settings["output_query_time_min"])
-        self.output_query_time_max = _sanitize_number(settings["output_query_time_max"])
-        self.output_lock_time_min = _sanitize_number(settings["output_lock_time_min"])
-        self.output_lock_time_max = _sanitize_number(settings["output_lock_time_max"])
-        self.output_rows_sent_min = _sanitize_number(settings["output_rows_sent_min"])
-        self.output_rows_sent_max = _sanitize_number(settings["output_rows_sent_max"])
-        self.output_rows_examined_min = _sanitize_number(settings["output_rows_examined_min"])
-        self.output_rows_examined_max = _sanitize_number(settings["output_rows_examined_max"])
-        self.output_datetime_min = _sanitize_datetime(settings["output_datetime_min"])
-        self.output_datetime_max = _sanitize_datetime(settings["output_datetime_max"])
+        self.output_query_time_min = sanitize_number(settings["output_query_time_min"])
+        self.output_query_time_max = sanitize_number(settings["output_query_time_max"])
+        self.output_lock_time_min = sanitize_number(settings["output_lock_time_min"])
+        self.output_lock_time_max = sanitize_number(settings["output_lock_time_max"])
+        self.output_rows_sent_min = sanitize_number(settings["output_rows_sent_min"])
+        self.output_rows_sent_max = sanitize_number(settings["output_rows_sent_max"])
+        self.output_rows_examined_min = sanitize_number(settings["output_rows_examined_min"])
+        self.output_rows_examined_max = sanitize_number(settings["output_rows_examined_max"])
+        self.output_datetime_min = sanitize_datetime(settings["output_datetime_min"])
+        self.output_datetime_max = sanitize_datetime(settings["output_datetime_max"])
         self.output_database_user = settings["output_database_user"]
         self.output_database_host = settings["output_database_host"]
         self.output_database_name = settings["output_database_name"]
-        self.display_datetime = _sanitize_binary_number(settings["display_datetime"])
-        self.display_database_host = _sanitize_binary_number(settings["display_database_host"])
-        self.display_time = _sanitize_binary_number(settings["display_time"])
-        self.display_database = _sanitize_binary_number(settings["display_database"])
-        self.display_timestamp = _sanitize_binary_number(settings["display_timestamp"])
-        self.display_statement = _sanitize_binary_number(settings["display_statement"])
+        self.display_datetime = sanitize_binary_number(settings["display_datetime"])
+        self.display_database_host = sanitize_binary_number(settings["display_database_host"])
+        self.display_time = sanitize_binary_number(settings["display_time"])
+        self.display_database = sanitize_binary_number(settings["display_database"])
+        self.display_timestamp = sanitize_binary_number(settings["display_timestamp"])
+        self.display_statement = sanitize_binary_number(settings["display_statement"])
 
     def write(self, file):
         with open(file, 'w') as outfile:
@@ -87,7 +87,7 @@ class ParserSettings:
             outfile.write('display_statement: ' + str(self.display_statement) + '\n')
 
 
-def _sanitize_order(setting):
+def sanitize_order(setting):
     default = "query_time"
     order_set = {"query_time", "lock_time", "rows_sent", "rows_examined", "datetime"}
     if setting.lower() in order_set:
@@ -95,7 +95,8 @@ def _sanitize_order(setting):
     else:
         return default
 
-def _sanitize_sort(setting):
+
+def sanitize_sort(setting):
     default = "desc"
     sort_set = {'asc', 'desc'}
     if setting.lower() in sort_set:
@@ -103,21 +104,24 @@ def _sanitize_sort(setting):
     else:
         return default
 
-def _sanitize_number(setting):
+
+def sanitize_number(setting):
     default = -1
     if str(setting).isnumeric():
         if float(setting) > 0 or float(setting) == -1:
             return float(setting)
     return default
 
-def _sanitize_binary_number(setting):
+
+def sanitize_binary_number(setting):
     default = 0
     if (str(setting)).isdigit():
         if int(setting) == 1:
             return int(setting)
     return default
 
-def _sanitize_datetime(setting):
+
+def sanitize_datetime(setting):
     default = '0000-00-00'
     try:
         datetime.datetime.strptime(setting, '%Y-%m-%d');
