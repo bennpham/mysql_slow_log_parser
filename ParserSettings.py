@@ -37,7 +37,7 @@ class ParserSettings:
 
         self.order = sanitize_order(settings["order"])
         self.sort = sanitize_sort(settings["sort"])
-        self.default_log_name = settings["default_log_name"]
+        self.default_log_name = sanitize_filename(settings["default_log_name"])
         self.output_query_time_min = sanitize_number(settings["output_query_time_min"])
         self.output_query_time_max = sanitize_number(settings["output_query_time_max"])
         self.output_lock_time_min = sanitize_number(settings["output_lock_time_min"])
@@ -125,3 +125,11 @@ def sanitize_datetime(setting):
         return setting
     except ValueError:
         return default
+
+
+def sanitize_filename(setting):
+    default = "mysql_slow_log.txt"
+    invalid_chars = set('\/:*?"<>|')
+    if any((c in invalid_chars) for c in setting):
+        return default
+    return setting
