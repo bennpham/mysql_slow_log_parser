@@ -33,8 +33,8 @@ class ParserSettings:
                 if len(parsed_line) == 2:
                     settings[parsed_line[0].strip()] = parsed_line[1].strip()
 
-        self.order = settings["order"]
-        self.sort = settings["sort"]
+        self.order = _sanitize_order(settings["order"])
+        self.sort = _sanitize_sort(settings["sort"])
         self.default_log_folder = settings["default_log_folder"]
         self.default_log_name = settings["default_log_name"]
         self.output_query_time_min = settings["output_query_time_min"]
@@ -82,3 +82,22 @@ class ParserSettings:
             outfile.write('display_database: ' + str(self.display_database) + '\n')
             outfile.write('display_timestamp: ' + str(self.display_timestamp) + '\n')
             outfile.write('display_statement: ' + str(self.display_statement) + '\n')
+
+
+def _sanitize_order(setting):
+    default = "query_time"
+    order_set = {"query_time", "lock_time", "rows_sent", "rows_examined", "datetime"}
+    if setting.lower() in order_set:
+        return setting.lower()
+    else:
+        return default
+
+def _sanitize_sort(setting):
+    default = "desc"
+    sort_set = {'asc', 'desc'}
+    if setting.lower() in sort_set:
+        return setting.lower()
+    else:
+        return default
+
+def 
