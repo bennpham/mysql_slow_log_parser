@@ -6,7 +6,7 @@ class ParserSettings:
         self.order = 'query_time'
         self.sort = 'desc'
         self.default_log_folder = 'logs'
-        self.default_log_name = 'output/mysql_slow_log.txt'
+        self.default_log_name = 'mysql_slow_log.txt'
         self.output_query_time_min = -1
         self.output_query_time_max = -1
         self.output_lock_time_min = -1

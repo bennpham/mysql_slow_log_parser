@@ -21,6 +21,7 @@ default_log_folder
 
 default_log_name
     * Default name to name the parsed log
+    * Cannot contain characters \ / : * ? " < > |
     - <ANY FILENAME>
 
 output_query_time_min
