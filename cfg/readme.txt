@@ -14,11 +14,6 @@ sort
     - asc
     - desc
 
-default_log_folder
-    * Default folder to find where all the log files to read are stored
-    * Make sure there aren't any other files EXCEPT mysql-slow-logs
-    - <ANY FOLDER NAME>
-
 default_log_name
     * Default name to name the parsed log
     * Cannot contain characters \ / : * ? " < > |

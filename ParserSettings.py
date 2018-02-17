@@ -5,7 +5,6 @@ class ParserSettings:
     def __init__(self):
         self.order = 'query_time'
         self.sort = 'desc'
-        self.default_log_folder = 'logs'
         self.default_log_name = 'mysql_slow_log.txt'
         self.output_query_time_min = -1
         self.output_query_time_max = -1
@@ -38,7 +37,6 @@ class ParserSettings:
 
         self.order = sanitize_order(settings["order"])
         self.sort = sanitize_sort(settings["sort"])
-        self.default_log_folder = settings["default_log_folder"]
         self.default_log_name = settings["default_log_name"]
         self.output_query_time_min = sanitize_number(settings["output_query_time_min"])
         self.output_query_time_max = sanitize_number(settings["output_query_time_max"])
@@ -64,7 +62,6 @@ class ParserSettings:
         with open(file, 'w') as outfile:
             outfile.write('order: "' + str(self.order) + '"\n')
             outfile.write('sort: "' + str(self.sort) + '"\n')
-            outfile.write('default_log_folder: "' + str(self.default_log_folder) + '"\n')
             outfile.write('default_log_name: "' + str(self.default_log_name) + '"\n')
             outfile.write('output_query_time_min: ' + str(self.output_query_time_min) + '\n')
             outfile.write('output_query_time_max: ' + str(self.output_query_time_max) + '\n')
