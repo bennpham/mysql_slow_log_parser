@@ -30,10 +30,10 @@ class ParserUI:
 
             # Load New Parser Settings
             if user_input.lower().strip() == 'l':
-                pass
+                self.load_new_parser_settings()
             # Save Current Parser Settings
             elif user_input.lower().strip() == 's':
-                pass
+                self.save_current_parser_settings()
             # Edit Parser Settings
             elif user_input.lower().strip() == 'e':
                 pass
@@ -43,6 +43,32 @@ class ParserUI:
             # Quit
             elif user_input.lower().strip() == 'q':
                 break
+
+    def load_new_parser_settings(self):
+        print("Type in the path and filename of the parser settings.")
+        print("Note: .cfg path is appended to the end of the file automatically. Do not specify the file extension.")
+        user_input = str(input(">"))
+        try:
+            self.parser_setting.read(user_input + ".cfg")
+        except FileNotFoundError:
+            print("Error: File does not exist!")
+        except OSError:
+            print("Error: Invalid filename!")
+
+    def save_current_parser_settings(self):
+        print("Type in the path and filename to save the current parser settings.")
+        print("Press Enter without typing any filename to save to default settings.")
+        print("Note: .cfg path is appended to the end of the file automatically. Do not specify the file extension.")
+        user_input = str(input(">"))
+        if user_input == "":
+            self.generate_new_default_setting()
+        else:
+            try:
+                self.parser_setting.write(user_input + ".cfg")
+            except FileNotFoundError:
+                print("Error: File does not exist!")
+            except OSError:
+                print("Error: Invalid filename!")
 
     def load_file(self, filename):
         pass
