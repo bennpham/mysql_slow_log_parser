@@ -138,6 +138,22 @@ class ParserUI:
             except OSError:
                 print("Error: Invalid filename!")
 
+    def new_parser_operation(self):
+        print("(1) Read one log")
+        print("(2) Read multiple slow logs in a folder")
+        user_input = str(input(">"))
+
+        # Read one log
+        if user_input.lower().strip() == 'l':
+            print("Enter file name of log file.")
+            user_input = str(input(">"))
+            self.load_file(user_input)  # TODO try catch
+        # Read multiple logs in a folder
+        elif user_input.lower().strip() == '2':
+            print("Enter path of log files.")
+            user_input = str(input(">"))
+            self.load_files(user_input)  # TODO try catch
+
     def load_file(self, filename):
         pass
 
