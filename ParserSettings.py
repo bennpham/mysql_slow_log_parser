@@ -90,6 +90,7 @@ def sanitize_order(setting):
     if setting.lower() in order_set:
         return setting.lower()
     else:
+        print("Incorrect order parameters. Setting default to " + default + ".")
         return default
 
 
@@ -99,6 +100,7 @@ def sanitize_sort(setting):
     if setting.lower() in sort_set:
         return setting.lower()
     else:
+        print("Incorrect sort parameters. Setting default to " + default + ".")
         return default
 
 
@@ -107,6 +109,7 @@ def sanitize_number(setting):
     if str(setting).isnumeric():
         if float(setting) > 0 or float(setting) == -1:
             return float(setting)
+    print("Incorrect number parameters. Setting default to " + str(default) + ".")
     return default
 
 
@@ -115,6 +118,7 @@ def sanitize_binary_number(setting):
     if (str(setting)).isdigit():
         if int(setting) == 1:
             return int(setting)
+    print("Incorrect binary number parameters. Setting default to " + str(default) + ".")
     return default
 
 
@@ -124,6 +128,7 @@ def sanitize_datetime(setting):
         datetime.datetime.strptime(setting, '%Y-%m-%d');
         return setting
     except ValueError:
+        print("Incorrect datetime parameters. Setting default to " + default + ".")
         return default
 
 
@@ -132,4 +137,5 @@ def sanitize_filename(setting):
     invalid_chars = set('\/:*?"<>|')
     if any((c in invalid_chars) for c in setting):
         return default
+    print("Incorrect filename parameters. Setting default to " + default + ".")
     return setting
