@@ -39,7 +39,7 @@ class ParserUI:
                 self.edit_parser_operations()
             # New Parser Operation
             elif user_input.lower().strip() == 'n':
-                pass
+                self.new_parser_operation()
             # Quit
             elif user_input.lower().strip() == 'q':
                 break
