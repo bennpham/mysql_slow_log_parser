@@ -1,10 +1,10 @@
-import LogList
+import Parser
 import ParserSettings
 
 
 class ParserUI:
     def __init__(self):
-        self.logs = LogList.LogList()
+        self.parser = Parser.Parser()
         self.parser_setting = ParserSettings.ParserSettings()
 
     def run(self):
@@ -17,6 +17,9 @@ class ParserUI:
             self.generate_new_default_setting()
 
         # Prompt user for input
+        self.prompt_screen1()
+
+    def prompt_screen1(self):
         while True:
             print("(L)oad new parser settings")
             print("(S)ave current parser settings")
@@ -25,8 +28,21 @@ class ParserUI:
             print("(Q)uit")
             user_input = str(input(">"))
 
-    def quit(self):
-        pass
+            # Load New Parser Settings
+            if user_input.lower().strip() == 'l':
+                pass
+            # Save Current Parser Settings
+            elif user_input.lower().strip() == 's':
+                pass
+            # Edit Parser Settings
+            elif user_input.lower().strip() == 'e':
+                pass
+            # New Parser Operation
+            elif user_input.lower().strip() == 'n':
+                pass
+            # Quit
+            elif user_input.lower().strip() == 'q':
+                break
 
     def load_file(self, filename):
         pass
