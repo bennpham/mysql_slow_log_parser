@@ -17,9 +17,9 @@ class ParserUI:
             self.generate_new_default_setting()
 
         # Prompt user for input
-        self.prompt_screen1()
+        self.prompt_screen()
 
-    def prompt_screen1(self):
+    def prompt_screen(self):
         while True:
             print("(L)oad new parser settings")
             print("(S)ave current parser settings")
