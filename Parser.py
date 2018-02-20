@@ -86,4 +86,4 @@ class Parser:
                     outfile.write(log.timestamp)
                 if parser_settings.display_statement == 1:
                     outfile.write(log.statement)
-                outfile.write("\n")
+                outfile.write("\n")  # TODO. Write only when filter constraint holds
