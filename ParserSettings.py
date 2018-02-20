@@ -119,7 +119,7 @@ def sanitize_number(setting):
 def sanitize_binary_number(setting):
     default = 0
     if (str(setting)).isdigit():
-        if int(setting) == 1:
+        if int(setting) == 1 or int(setting) == 0:
             return int(setting)
     print("Incorrect binary number parameters. Setting default to " + str(default) + ".")
     return default
