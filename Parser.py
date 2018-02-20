@@ -75,15 +75,15 @@ class Parser:
         with open(file, "w") as outfile:
             for log in self.list:
                 if parser_settings.display_datetime == 1:
-                    outfile.write(log.datetime + "\n")
+                    outfile.write(log.datetime)
                 if parser_settings.display_database_host == 1:
-                    outfile.write(log.database_host + "\n")
+                    outfile.write(log.database_host)
                 if parser_settings.display_time == 1:
-                    outfile.write(log.time + "\n")
+                    outfile.write(log.time)
                 if parser_settings.display_database == 1:
-                    outfile.write(log.database + "\n")
+                    outfile.write(log.database)
                 if parser_settings.display_timestamp == 1:
-                    outfile.write(log.timestamp + "\n")
+                    outfile.write(log.timestamp)
                 if parser_settings.display_statement == 1:
-                    outfile.write(log.statement + "\n")
+                    outfile.write(log.statement)
                 outfile.write("\n")
