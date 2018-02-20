@@ -172,8 +172,15 @@ class ParserUI:
 
         self.parser.reorder(self.parser_setting.order, self.parser_setting.sort)
         print("Enter output log name.")
+        output_log_name = self.parser_setting.default_log_name
         user_input2 = str(input(">"))
-        self.parser.write("outputs/" + user_input2 + ".txt", self.parser_setting)
+        if user_input2.strip() != "":
+            output_log_name = user_input2
+        invalid_chars = set('\/:*?"<>|.')
+        if any((c in invalid_chars) for c in user_input2):
+            output_log_name = self.parser_setting.default_log_name
+            print('Error: Invalid file name! Setting default filename to "' + output_log_name + '.txt"')
+        self.parser.write("outputs/" + output_log_name + ".txt", self.parser_setting)
 
     def load_file(self, filename):
         self.parser.parse(filename)
