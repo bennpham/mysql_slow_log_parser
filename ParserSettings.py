@@ -141,6 +141,6 @@ def sanitize_filename(setting):
     default = "mysql_slow_log.txt"
     invalid_chars = set('\/:*?"<>|')
     if any((c in invalid_chars) for c in setting):
+        print("Incorrect filename parameters. Setting default to " + default + ".")
         return default
-    print("Incorrect filename parameters. Setting default to " + default + ".")
     return setting
