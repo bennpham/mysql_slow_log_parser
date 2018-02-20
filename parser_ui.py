@@ -16,6 +16,10 @@ class ParserUI:
             print("Default settings cannot be found!")
             print("Generating new default settings...\n")
             self.generate_new_default_setting()
+        except KeyError:
+            print("Default settings are invalid!")
+            print("Generating new default settings...\n")
+            self.generate_new_default_setting()
 
         # Prompt user for input
         self.prompt_screen()
@@ -182,4 +186,4 @@ class ParserUI:
                 self.parser.parse(folder + "/" + file)
 
     def generate_new_default_setting(self):
-        self.parser_setting.write("cfg/default_setting.cfg", self.parser_setting)
+        self.parser_setting.write("cfg/default_setting.cfg")
