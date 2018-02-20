@@ -15,19 +15,19 @@ class Parser:
 
     def reorder(self, order, sort):
         # Define default key
-        key = Log.Log.query_time
+        key = lambda log: log.query_time
         reverse = True
 
         if order == "query_time":
-            key = Log.Log.query_time
+            key = lambda log: log.query_time
         elif order == "lock_time":
-            key = Log.Log.lock_time
+            key = lambda log: log.lock_time
         elif order == "rows_sent":
-            key = Log.Log.rows_sent
+            key = lambda log: log.rows_sent
         elif order == "rows_examined":
-            key = Log.Log.rows_examined
+            key = lambda log: log.rows_examined
         elif order == "datetime":
-            key = Log.Log.datetime_value
+            key = lambda log: log.datetime_value
 
         if sort == 'asc':
             reverse = False
