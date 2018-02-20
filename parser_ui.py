@@ -57,7 +57,7 @@ class ParserUI:
         user_input = str(input(">"))
         self.parser_setting.sort = ParserSettings.sanitize_sort(user_input)
         print("Default log name. Cannot contain the following characters: ")
-        print("\ / : * ? \" < > |")
+        print("\ / : * ? \" < > | .")
         print('Leave blank and press enter to default to "mysql_slow_log.txt"')
         user_input = str(input(">"))
         self.parser_setting.default_log_name = ParserSettings.sanitize_filename(user_input)

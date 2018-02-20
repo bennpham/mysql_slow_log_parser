@@ -139,7 +139,7 @@ def sanitize_datetime(setting):
 
 def sanitize_filename(setting):
     default = "mysql_slow_log"
-    invalid_chars = set('\/:*?"<>|')
+    invalid_chars = set('\/:*?"<>|.')
     if any((c in invalid_chars) for c in setting):
         print("Incorrect filename parameters. Setting default to " + default + ".")
         return default
