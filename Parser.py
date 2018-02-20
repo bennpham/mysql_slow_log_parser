@@ -39,30 +39,37 @@ class Parser:
     def parse(self, file):
         with open(file, "r") as infile:
             lines = infile.readlines()[3:]
-            num_of_entries = len(lines) // 6
-            # Fails if remainder in divide by 6 and first line doesn't start with # Time
-            if len(lines) % 6 != 0:
-                return False
-            if len(lines) > 0:
-                if lines[0][0:7] != "# Time:":
-                    return False
-            for i in range(num_of_entries):
-                log = Log.Log()
-                log.datetime = lines[i*6]
-                log.database_host = lines[i*6 + 1]
-                log.time = lines[i*6 + 2]
-                log.database = lines[i*6 + 3]
-                log.timestamp = lines[i*6 + 4]
-                log.statement = lines[i*6 + 5]
-                # Get number values for query_time, lock_time, rows_sent, rows_examined
-                time = lines[i*6 + 2].split()
-                log.query_time = float(time[2])
-                log.lock_time = float(time[4])
-                log.rows_sent = float(time[6])
-                log.rows_examined = float(time[8])
-                log.datetime_value = datetime.datetime(int(log.datetime[8:12]), int(log.datetime[13:15]), int(log.datetime[16:18]),
-                                                       int(log.datetime[19:21]), int(log.datetime[22:24]), int(log.datetime[25:27]))
-                self.add(log)
+
+            log = Log.Log()
+            first_log = True
+            for line in lines:
+                if line[0:7] == "# Time:":
+                    if first_log:
+                        first_log = False
+                    else:
+                        self.add(log)
+                        log = Log.Log()
+                    log.datetime = line
+                    log.datetime_value = datetime.datetime(int(line[8:12]), int(line[13:15]),
+                                                           int(line[16:18]),
+                                                           int(line[19:21]), int(line[22:24]),
+                                                           int(line[25:27]))
+                elif line[0:12] == "# User@Host:":
+                    log.database_host = line
+                elif line[0:13] == "# Query_time:":
+                    log.time = line
+                    # Get number values for query_time, lock_time, rows_sent, rows_examined
+                    time = line.split()
+                    log.query_time = float(time[2])
+                    log.lock_time = float(time[4])
+                    log.rows_sent = float(time[6])
+                    log.rows_examined = float(time[8])
+                elif line[0:3] == "use":
+                    log.database = line
+                elif line[0:14] == "SET timestamp=":
+                    log.timestamp = line
+                else:
+                    log.statement = line
 
     def write(self, file, parser_settings):
         with open(file, "w") as outfile:
