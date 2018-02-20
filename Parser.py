@@ -63,3 +63,20 @@ class Parser:
                 log.datetime_value = datetime.datetime(int(log.datetime[8:12]), int(log.datetime[13:15]), int(log.datetime[16:18]),
                                                        int(log.datetime[19:21]), int(log.datetime[22:24]), int(log.datetime[25:27]))
                 self.add(log)
+
+    def write(self, file, parser_settings):
+        with open(file, "w") as outfile:
+            for log in self.list:
+                if parser_settings.display_datetime == 1:
+                    outfile.write(log.datetime + "\n")
+                if parser_settings.display_database_host == 1:
+                    outfile.write(log.database_host + "\n")
+                if parser_settings.display_time == 1:
+                    outfile.write(log.time + "\n")
+                if parser_settings.display_database == 1:
+                    outfile.write(log.database + "\n")
+                if parser_settings.display_timestamp == 1:
+                    outfile.write(log.timestamp + "\n")
+                if parser_settings.display_statement == 1:
+                    outfile.write(log.statement + "\n")
+                outfile.write("\n")

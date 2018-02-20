@@ -1,5 +1,6 @@
 import Parser
 import ParserSettings
+import os
 
 
 class ParserUI:
@@ -113,6 +114,7 @@ class ParserUI:
         self.parser_setting.display_statement = ParserSettings.sanitize_binary_number(user_input)
 
     def load_new_parser_settings(self):
+        self.parser.clear()
         print("Type in the path and filename of the parser settings.")
         print("Note: .cfg path is appended to the end of the file automatically. Do not specify the file extension.")
         user_input = str(input(">"))
@@ -154,11 +156,21 @@ class ParserUI:
             user_input = str(input(">"))
             self.load_files(user_input)  # TODO try catch
 
+        self.parser.reorder(self.parser_setting.order, self.parser_setting.sort)
+        print("Enter output log name.")
+        user_input2 = str(input(">"))
+        self.parser.write("output/" + user_input2 + ".txt")
+
     def load_file(self, filename):
-        pass
+        self.parser.parse(filename)
 
     def load_files(self, folder):
-        pass
+        files = []
+        for (dirpath, dirnames, filenames) in os.walk(folder):
+            files.extend(filenames)
+        for file in files:
+            if file != "readme.txt":
+                self.parser.parse(file)
 
     def generate_new_default_setting(self):
-        self.parser_setting.write("cfg/default_setting.cfg")
+        self.parser_setting.write("cfg/default_setting.cfg", self.parser_setting)
