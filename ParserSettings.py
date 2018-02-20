@@ -106,9 +106,12 @@ def sanitize_sort(setting):
 
 def sanitize_number(setting):
     default = -1
-    if str(setting).isnumeric():
-        if float(setting) > 0 or float(setting) == -1:
-            return float(setting)
+    try:
+        converted_setting = float(setting)
+        if converted_setting > 0 or converted_setting == -1:
+            return converted_setting
+    except ValueError:
+        pass
     print("Incorrect number parameters. Setting default to " + str(default) + ".")
     return default
 
