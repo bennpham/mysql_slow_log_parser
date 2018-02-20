@@ -149,14 +149,19 @@ class ParserUI:
         if user_input.strip() == '1':
             print("Enter file name of log file.")
             user_input = str(input(">"))
-            self.load_file(user_input)  # TODO try catch
+            try:
+                self.load_file(user_input)
+            except FileNotFoundError:
+                print("Error: File cannot be found!")
+                return False
+            except OSError:
+                print("Error: Invalid filename!")
+                return False
         # Read multiple logs in a folder
         elif user_input.strip() == '2':
-            print("Enter path of log files.")
-            user_input = str(input(">"))
-            self.load_files(user_input)  # TODO try catch
+            self.load_files()
         else:
-            print("Invalid command!")
+            print("Error: Invalid command!")
             return False
 
         self.parser.reorder(self.parser_setting.order, self.parser_setting.sort)
@@ -167,7 +172,8 @@ class ParserUI:
     def load_file(self, filename):
         self.parser.parse(filename)
 
-    def load_files(self, folder):
+    def load_files(self):
+        folder = "logs"
         files = []
         for (dirpath, dirnames, filenames) in os.walk(folder):
             files.extend(filenames)
