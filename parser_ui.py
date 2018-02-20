@@ -146,12 +146,12 @@ class ParserUI:
         user_input = str(input(">"))
 
         # Read one log
-        if user_input.lower().strip() == 'l':
+        if user_input.strip() == '1':
             print("Enter file name of log file.")
             user_input = str(input(">"))
             self.load_file(user_input)  # TODO try catch
         # Read multiple logs in a folder
-        elif user_input.lower().strip() == '2':
+        elif user_input.strip() == '2':
             print("Enter path of log files.")
             user_input = str(input(">"))
             self.load_files(user_input)  # TODO try catch
@@ -159,7 +159,7 @@ class ParserUI:
         self.parser.reorder(self.parser_setting.order, self.parser_setting.sort)
         print("Enter output log name.")
         user_input2 = str(input(">"))
-        self.parser.write("output/" + user_input2 + ".txt")
+        self.parser.write("output/" + user_input2 + ".txt", self.parser_setting)
 
     def load_file(self, filename):
         self.parser.parse(filename)
