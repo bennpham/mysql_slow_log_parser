@@ -143,4 +143,6 @@ def sanitize_filename(setting):
     if any((c in invalid_chars) for c in setting):
         print("Incorrect filename parameters. Setting default to " + default + ".")
         return default
+    if setting.strip() == "":
+        return default
     return setting
