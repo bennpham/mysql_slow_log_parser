@@ -155,6 +155,9 @@ class ParserUI:
             print("Enter path of log files.")
             user_input = str(input(">"))
             self.load_files(user_input)  # TODO try catch
+        else:
+            print("Invalid command!")
+            return False
 
         self.parser.reorder(self.parser_setting.order, self.parser_setting.sort)
         print("Enter output log name.")
