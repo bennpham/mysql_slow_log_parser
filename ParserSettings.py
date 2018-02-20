@@ -5,7 +5,7 @@ class ParserSettings:
     def __init__(self):
         self.order = 'query_time'
         self.sort = 'desc'
-        self.default_log_name = 'mysql_slow_log.txt'
+        self.default_log_name = 'mysql_slow_log'
         self.output_query_time_min = -1
         self.output_query_time_max = -1
         self.output_lock_time_min = -1
@@ -138,7 +138,7 @@ def sanitize_datetime(setting):
 
 
 def sanitize_filename(setting):
-    default = "mysql_slow_log.txt"
+    default = "mysql_slow_log"
     invalid_chars = set('\/:*?"<>|')
     if any((c in invalid_chars) for c in setting):
         print("Incorrect filename parameters. Setting default to " + default + ".")
