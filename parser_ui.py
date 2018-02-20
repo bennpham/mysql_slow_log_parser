@@ -170,7 +170,7 @@ class ParserUI:
             files.extend(filenames)
         for file in files:
             if file != "readme.txt":
-                self.parser.parse(file)
+                self.parser.parse(folder + "/" + file)
 
     def generate_new_default_setting(self):
         self.parser_setting.write("cfg/default_setting.cfg", self.parser_setting)
