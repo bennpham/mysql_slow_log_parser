@@ -159,7 +159,7 @@ class ParserUI:
         self.parser.reorder(self.parser_setting.order, self.parser_setting.sort)
         print("Enter output log name.")
         user_input2 = str(input(">"))
-        self.parser.write("output/" + user_input2 + ".txt", self.parser_setting)
+        self.parser.write("outputs/" + user_input2 + ".txt", self.parser_setting)
 
     def load_file(self, filename):
         self.parser.parse(filename)
