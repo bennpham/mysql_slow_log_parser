@@ -127,6 +127,8 @@ def sanitize_binary_number(setting):
 
 def sanitize_datetime(setting):
     default = '0000-00-00'
+    if setting == default:
+        return setting
     try:
         datetime.datetime.strptime(setting, '%Y-%m-%d');
         return setting
