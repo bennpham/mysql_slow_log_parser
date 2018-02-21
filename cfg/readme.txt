@@ -60,13 +60,15 @@ output_rows_examined_max
     - <ANY NUMBER>
 
 output_datetime_min
-    * Minimum datetime to output in the log
+    * Minimum datetime to output in the log (not inclusive)
     * Default 0000-00-00 (don't check)
+    * Example: 2018-02-20 will take 2018-02-21 and above
     - Any date format in the form of YYYY-MM-DD
 
 output_datetime_max
-    * Maximum datetime to output in the log
+    * Maximum datetime to output in the log (not inclusive)
     * Default 0000-00-00 (don't check)
+    * Example: 2018-02-20 will take 2018-02-19 and below
     - Any date format in the form of YYYY-MM-DD
 
 output_database_user
