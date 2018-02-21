@@ -91,40 +91,40 @@ class Parser:
 
 def _check_parser_settings_to_log_values(parser_settings, log):
     # Query Time Min
-    if log.query_time < parser_settings.output_query_time_min:
+    if log.query_time <= parser_settings.output_query_time_min:
         return False
     # Query Time Max
-    if log.query_time > parser_settings.output_query_time_max and parser_settings.output_query_time_max != -1:
+    if log.query_time >= parser_settings.output_query_time_max and parser_settings.output_query_time_max != -1:
         return False
     # Lock Time Min
-    if log.lock_time < parser_settings.output_lock_time_min:
+    if log.lock_time <= parser_settings.output_lock_time_min:
         return False
     # Lock Time Max
-    if log.lock_time > parser_settings.output_lock_time_max and parser_settings.output_lock_time_max != -1:
+    if log.lock_time >= parser_settings.output_lock_time_max and parser_settings.output_lock_time_max != -1:
         return False
     # Rows Sent Min
-    if log.rows_sent < parser_settings.output_rows_sent_min:
+    if log.rows_sent <= parser_settings.output_rows_sent_min:
         return False
     # Rows Sent Max
-    if log.rows_sent > parser_settings.output_rows_sent_max and parser_settings.output_rows_sent_max != -1:
+    if log.rows_sent >= parser_settings.output_rows_sent_max and parser_settings.output_rows_sent_max != -1:
         return False
     # Rows Examined Min
-    if log.rows_examined < parser_settings.output_rows_examined_min:
+    if log.rows_examined <= parser_settings.output_rows_examined_min:
         return False
     # Rows Examined Max
-    if log.rows_examined > parser_settings.output_rows_examined_max and parser_settings.output_rows_examined_max != -1:
+    if log.rows_examined >= parser_settings.output_rows_examined_max and parser_settings.output_rows_examined_max != -1:
         return False
     # Datetime Min
     if parser_settings.output_datetime_min != '0000-00-00':
         try:
-            if log.datetime_value > datetime.datetime.strptime(parser_settings.output_datetime_min, '%Y-%m-%d'):
+            if log.datetime_value >= datetime.datetime.strptime(parser_settings.output_datetime_min, '%Y-%m-%d'):
                 return False
         except:
             pass
     # Datetime Max
     if parser_settings.output_datetime_max != '0000-00-00':
         try:
-            if log.datetime_value < datetime.datetime.strptime(parser_settings.output_datetime_max, '%Y-%m-%d'):
+            if log.datetime_value <= datetime.datetime.strptime(parser_settings.output_datetime_max, '%Y-%m-%d'):
                 return False
         except:
             pass
