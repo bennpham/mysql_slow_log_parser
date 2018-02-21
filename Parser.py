@@ -117,14 +117,14 @@ def _check_parser_settings_to_log_values(parser_settings, log):
     # Datetime Min
     if parser_settings.output_datetime_min != '0000-00-00':
         try:
-            if log.datetime_value >= datetime.datetime.strptime(parser_settings.output_datetime_min, '%Y-%m-%d'):
+            if log.datetime_value <= datetime.datetime.strptime(parser_settings.output_datetime_min, '%Y-%m-%d'):
                 return False
         except:
             pass
     # Datetime Max
     if parser_settings.output_datetime_max != '0000-00-00':
         try:
-            if log.datetime_value <= datetime.datetime.strptime(parser_settings.output_datetime_max, '%Y-%m-%d'):
+            if log.datetime_value >= datetime.datetime.strptime(parser_settings.output_datetime_max, '%Y-%m-%d'):
                 return False
         except:
             pass
